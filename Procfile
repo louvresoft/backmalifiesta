@@ -1,0 +1,1 @@
+web: gunicorn malifiestaback.wsgi --log-file -
