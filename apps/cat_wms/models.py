@@ -165,7 +165,6 @@ class Producto(BaseModel):
     nombre = models.CharField("Clave", max_length=50, unique=True)
     descripcion = models.CharField(max_length=250, blank=True, null=True)
     fecha_alta = models.DateTimeField(auto_now_add=True)
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE)
     codigo = models.CharField(max_length=7, validators=[MinLengthValidator(7)])
     modelo = models.CharField(max_length=50, blank=True, null=True)
