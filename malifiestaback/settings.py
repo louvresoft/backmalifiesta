@@ -97,18 +97,18 @@ WSGI_APPLICATION = 'malifiestaback.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': dj_database_url.config(
-#         default=config('DATABASE_URL')
-#     )
-# }
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default=config('DATABASE_URL')
+    )
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 # Password validation
@@ -164,8 +164,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:8002",
     "http://127.0.0.1:4200",
     "http://localhost:4200",
-    #"https://malifiestas.web.app/",
-    #"https://malifiestas.web.app"
+    "https://malifiestas.web.app/",
+    "https://malifiestas.web.app"
 ]
 
 CORS_ALLOWED_ORIGINS_REGEX = [
