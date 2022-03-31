@@ -17,62 +17,12 @@ class Ubicaciones(BaseModel):
         db_table = 'cat_ubicaciones'
 
 
-CHOICES_ESTATUS = (
-    ("ALTA", "ALTA"),
-    ("BAJA", "BAJA")
-)
-
-
-class Perfil(BaseModel):
-    CLIENTE = 1
-    ADMINISTRADOR = 2
-    PERSONAL1 = 3
-    PERSONAL2 = 4
-    USUARIOS_CHOICES = (
-        (CLIENTE, 'Cliente'),
-        (ADMINISTRADOR, 'Administrador'),
-        (PERSONAL1, 'Personal'),
-        (PERSONAL2, 'Personal 2')
-    )
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='perfil')
-    tipo_usuario = models.PositiveSmallIntegerField(choices=USUARIOS_CHOICES, default=1)
-    rfc = models.CharField(max_length=20, blank=True, null=True)
-    contacto1 = models.CharField(max_length=100, blank=True, null=True)
-    contacto2 = models.CharField(max_length=100, blank=True, null=True)
-    telefono1 = models.CharField(max_length=20, blank=True, null=True)
-    telefono2 = models.CharField(max_length=20, blank=True, null=True)
-    email = models.EmailField(max_length=20, blank=True, null=True)
-    estatus = models.CharField(max_length=40, choices=CHOICES_ESTATUS, default="ALTA")
-
-    def __str__(self):
-        return self.user.username
-
-    class Meta:
-        db_table = 'cat_perfil'
-
-    @receiver(post_save, sender=User)
-    def create_or_update_user_profile(sender, instance, created, **kwargs):
-        if created:
-            Perfil.objects.create(user=instance)
-        instance.perfil.save()
-
-
-class Sociedad(BaseModel):
-    sociedad = models.CharField(max_length=250)
-    nomenglatura = models.CharField("Nomenclatura", max_length=10)
-
-    def __str__(self):
-        return self.nomenglatura
-
-    class Meta:
-        db_table = 'cat_sociedad'
-
 
 class Centro(BaseModel):
-    centro = models.CharField(max_length=100)
-    nomenglatura = models.CharField("Nomenclatura", max_length=10)
-    descripcion = models.TextField(blank=True, null=True)
-    sociedad = models.ForeignKey(Sociedad, on_delete=models.CASCADE, blank=True, null=True)
+    id = models.AutoField(primary_key=True, db_column="centro_id")
+    sociedad = models.CharField(max_length=150)
+    centro = models.CharField(max_length=150)
+    direccion = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.nomenglatura
@@ -100,31 +50,14 @@ class Categoria(BaseModel):
         return self.nombre
 
     class Meta:
-        db_table = 'cat_categorias'
-
-
-class Clientes(BaseModel):
-    nombre = models.CharField(max_length=50)
-    rfc = models.CharField(max_length=20, blank=True, null=True)
-    contacto1 = models.CharField(max_length=100, blank=True, null=True)
-    contacto2 = models.CharField(max_length=100, blank=True, null=True)
-    telefono1 = models.CharField(max_length=20, blank=True, null=True)
-    telefono2 = models.CharField(max_length=20, blank=True, null=True)
-    email = models.EmailField(max_length=20, blank=True, null=True)
-    estatus = models.CharField(max_length=40, choices=CHOICES_ESTATUS, default="ALTA")
-
-    def __str__(self):
-        return self.nombre
-
-    class Meta:
-        db_table = 'cat_clientes'
+        db_table = 'cat_producto_categoria'
 
 
 class Proveedor(BaseModel):
     nombre = models.CharField(max_length=200)
     telefono = models.CharField(max_length=15, blank=True, null=True)
-    telefono2 = models.CharField(max_length=15, blank=True, null=True)
-    direccion = models.CharField(max_length=250, blank=True, null=True)
+    email = models.EmailField()
+    rfc = models.CharField(max_length=13, blank=True, null=True)
 
     def __str__(self):
         return self.nombre
@@ -140,18 +73,6 @@ CAPACIDAD_CHOICES = (
 )
 
 
-class Flotilla(BaseModel):
-    marca = models.CharField(max_length=50, blank=True, null=True)
-    modelo = models.CharField(max_length=50, blank=True, null=True)
-    placas = models.CharField(max_length=6, blank=True, null=True)
-    capacidad = models.CharField(max_length=50, blank=True, null=True, choices=CAPACIDAD_CHOICES)
-    operador = models.CharField(max_length=50, blank=True, null=True)
-
-    def __str__(self):
-        return self.marca
-
-    class Meta:
-        db_table = 'cat_flotilla'
 
 
 PRODUCTOS_ESTATUS = (
@@ -200,8 +121,4 @@ class Producto(BaseModel):
     class Meta:
         db_table = 'cat_producto'
 
-# class KitProducto(BaseModel):
-#     producto_padre = models.ForeignKey(Producto, models.CASCADE, related_name="producto_padre")
-#     producto = models.ForeignKey(Producto, models.CASCADE, related_name="producto_hijo")
-#     cantidad = models.IntegerField()
 
