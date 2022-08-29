@@ -7,4 +7,4 @@ class CentroSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Centro
-        exclude = ('state', 'created_date', 'modified_date', 'deleted_date')
+        exclude = ('created_date', 'modified_date', 'deleted_date')

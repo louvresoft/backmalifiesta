@@ -57,13 +57,12 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
-ROOT_URLCONF = 'malifiestaback.urls'
+ROOT_URLCONF = 'configuracion.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -76,7 +75,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'malifiestaback.wsgi.application'
+WSGI_APPLICATION = 'configuracion.wsgi.application'
 
 # DATABASES = {
 #     'default': dj_database_url.config(
@@ -142,8 +141,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:8002",
     "http://127.0.0.1:4200",
     "http://localhost:4200",
-    #"https://malifiestas.web.app/",
-    #"https://malifiestas.web.app"
+    # "https://malifiestas.web.app/",
+    # "https://malifiestas.web.app"
 ]
 
 CORS_ALLOWED_ORIGINS_REGEX = [
