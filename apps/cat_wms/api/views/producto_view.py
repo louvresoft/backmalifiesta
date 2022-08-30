@@ -12,9 +12,9 @@ class ProductoViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self, pk=None):
         if pk is None:
-            return self.get_serializer().Meta.model.objects.filter(state=True)
+            return self.get_serializer().Meta.model.objects.all()
         else:
-            return self.get_serializer().Meta.model.objects.filter(state=True, id=pk).first()
+            return self.get_serializer().Meta.model.objects.filter(id=pk).first()
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)

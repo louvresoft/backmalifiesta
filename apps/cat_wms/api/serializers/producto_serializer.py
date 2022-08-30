@@ -9,4 +9,4 @@ class ProductoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Producto
-        exclude = ('state', 'created_date', 'modified_date', 'deleted_date')
+        exclude = ('created_date', 'modified_date', 'deleted_date')

@@ -8,6 +8,6 @@ class CentroViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self, pk=None):
         if pk is None:
-            return self.get_serializer().Meta.model.objects.filter(state=True).order_by('-id')
+            return self.get_serializer().Meta.model.objects.all().order_by('-id')
         else:
-            return self.get_serializer().Meta.model.objects.filter(state=True, id=pk).first()
+            return self.get_serializer().Meta.model.objects.filter(id=pk).first()
