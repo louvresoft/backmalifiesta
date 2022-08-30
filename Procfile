@@ -1,1 +1,1 @@
-web: gunicorn malifiestaback.wsgi --log-file -
+web: gunicorn configuracion.wsgi --log-file -
